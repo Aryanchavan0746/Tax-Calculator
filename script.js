@@ -51,13 +51,23 @@ document.addEventListener('DOMContentLoaded', function() {
             tax = 0.1 * (overallIncome - 800000);
           }
         }
-        taxResult.textContent = `Your overall income will be ₹${overallIncome} after tax deduction of ₹${tax.toFixed(2)}.`;
+        taxResult.textContent = `Your overall income will be ₹${overallIncome.toFixed(2)} after tax deduction of ₹${tax.toFixed(2)}.`;
         modal.style.display = 'block';
       }
     });
   
     closeButton.addEventListener('click', function() {
       modal.style.display = 'none';
+      // Clear input fields
+      document.getElementById('grossIncome').value = '';
+      document.getElementById('extraIncome').value = '';
+      document.getElementById('ageGroup').value = '';
+      document.getElementById('deductions').value = '';
+      // Clear error messages
+      document.getElementById('grossIncomeError').textContent = '';
+      document.getElementById('extraIncomeError').textContent = '';
+      document.getElementById('ageGroupError').textContent = '';
+      document.getElementById('deductionsError').textContent = '';
     });
   
     window.addEventListener('click', function(event) {
