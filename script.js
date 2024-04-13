@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('taxForm');
     const modal = document.getElementById('modal');
     const closeButton = document.querySelector('.close');
+    const closeResultButton = document.querySelector('.close-button');
     const taxResult = document.getElementById('taxResult');
   
     form.addEventListener('submit', function(event) {
@@ -51,13 +52,29 @@ document.addEventListener('DOMContentLoaded', function() {
             tax = 0.1 * (overallIncome - 800000);
           }
         }
-        taxResult.textContent = `Your overall income will be ₹${overallIncome.toFixed(2)} after tax deduction of ₹${tax.toFixed(2)}.`;
+        taxResult.textContent = `      ₹${overallIncome.toFixed(2)} after tax deduction of ₹${tax.toFixed(2)}.`;
         modal.style.display = 'block';
       }
     });
   
     closeButton.addEventListener('click', function() {
       modal.style.display = 'none';
+      clearForm();
+    });
+  
+    closeResultButton.addEventListener('click', function() {
+      modal.style.display = 'none';
+      clearForm();
+    });
+  
+    window.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+        clearForm();
+      }
+    });
+  
+    function clearForm() {
       // Clear input fields
       document.getElementById('grossIncome').value = '';
       document.getElementById('extraIncome').value = '';
@@ -68,12 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('extraIncomeError').textContent = '';
       document.getElementById('ageGroupError').textContent = '';
       document.getElementById('deductionsError').textContent = '';
-    });
-  
-    window.addEventListener('click', function(event) {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
+    }
   });
   
